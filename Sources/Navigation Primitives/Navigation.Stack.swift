@@ -133,7 +133,10 @@ extension Navigation.Stack {
 // MARK: - Collection
 
 extension Navigation.Stack: RandomAccessCollection {
+    /// A placement on the stack.
     public typealias Element = Navigation.Destination<Value>
+
+    /// An offset from the bottom of the stack.
     public typealias Index = Int
 
     /// The offset of the bottom placement.
