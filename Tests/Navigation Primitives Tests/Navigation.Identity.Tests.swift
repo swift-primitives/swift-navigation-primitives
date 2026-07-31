@@ -1,24 +1,25 @@
 import Navigation_Primitives
 import Testing
 
-extension Navigation.Identity {
-    @Suite struct Test {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-    }
+/// `Navigation.Identity` is a `Tagged` instantiation, and a suite cannot be nested in a
+/// constrained extension of a generic type, so the suite is hosted top-level per the
+/// testing skill.
+@Suite struct `Navigation Identity Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
 }
 
-extension Navigation.Identity.Test.Unit {
+extension `Navigation Identity Tests`.Unit {
     @Test func `a fresh source mints from zero`() {
-        var source = Navigation.Identity.Source()
+        var source = Navigation.Source()
 
-        #expect(source.mint().ordinal == 0)
-        #expect(source.mint().ordinal == 1)
-        #expect(source.mint().ordinal == 2)
+        #expect(source.mint().underlying == 0)
+        #expect(source.mint().underlying == 1)
+        #expect(source.mint().underlying == 2)
     }
 
     @Test func `next reports the identity mint will return`() {
-        var source = Navigation.Identity.Source()
+        var source = Navigation.Source()
         _ = source.mint()
 
         let announced = source.next
@@ -28,7 +29,7 @@ extension Navigation.Identity.Test.Unit {
     }
 
     @Test func `minted identities are never equal to one another`() {
-        var source = Navigation.Identity.Source()
+        var source = Navigation.Source()
         var seen: Set<Navigation.Identity> = []
 
         for _ in 0..<128 {
@@ -41,7 +42,7 @@ extension Navigation.Identity.Test.Unit {
     }
 
     @Test func `comparison reports mint order`() {
-        var source = Navigation.Identity.Source()
+        var source = Navigation.Source()
         let earlier = source.mint()
         let later = source.mint()
 
@@ -51,7 +52,7 @@ extension Navigation.Identity.Test.Unit {
     }
 
     @Test func `a source is a value, so copies mint independently`() {
-        var original = Navigation.Identity.Source()
+        var original = Navigation.Source()
         _ = original.mint()
 
         var copy = original
@@ -64,7 +65,7 @@ extension Navigation.Identity.Test.Unit {
 
     @Test func `replaying the same placements reproduces the same identities`() {
         func run() -> [Navigation.Identity] {
-            var source = Navigation.Identity.Source()
+            var source = Navigation.Source()
             return (0..<8).map { _ in source.mint() }
         }
 
@@ -72,17 +73,17 @@ extension Navigation.Identity.Test.Unit {
     }
 }
 
-extension Navigation.Identity.Test.`Edge Case` {
+extension `Navigation Identity Tests`.`Edge Case` {
     @Test func `a restored source resumes from the recorded ordinal`() {
-        var source = Navigation.Identity.Source(next: Navigation.Identity(ordinal: 41))
+        var source = Navigation.Source(next: Navigation.Identity(41))
 
-        #expect(source.mint().ordinal == 41)
-        #expect(source.next.ordinal == 42)
+        #expect(source.mint().underlying == 41)
+        #expect(source.next.underlying == 42)
     }
 
     @Test func `identities minted by different sources compare by ordinal alone`() {
-        var left = Navigation.Identity.Source()
-        var right = Navigation.Identity.Source()
+        var left = Navigation.Source()
+        var right = Navigation.Source()
 
         #expect(left.mint() == right.mint())
     }

@@ -15,7 +15,7 @@ import Testing
 
     /// Mints placements so a test reads as a sequence of navigations.
     struct Placer {
-        var source = Navigation.Identity.Source()
+        var source = Navigation.Source()
 
         mutating func callAsFunction(_ screen: Screen) -> Navigation.Destination<Screen> {
             Navigation.Destination(identity: source.mint(), value: screen)

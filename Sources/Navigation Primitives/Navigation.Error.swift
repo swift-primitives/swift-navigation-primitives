@@ -19,7 +19,7 @@ extension Navigation {
         /// A placement already carries this identity.
         ///
         /// Reached by placing an identity twice — by reusing a value already in
-        /// the state, or by restoring a ``Navigation/Identity/Source`` below an
+        /// the state, or by restoring a ``Navigation/Source`` below an
         /// identity the accompanying state already holds. Minting each
         /// placement from the state's own source makes this unreachable.
         case duplicate(Navigation.Identity)

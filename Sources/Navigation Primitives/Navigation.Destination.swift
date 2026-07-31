@@ -9,7 +9,7 @@ extension Navigation {
     /// ```swift
     /// enum Screen { case home, settings }
     ///
-    /// var source = Navigation.Identity.Source()
+    /// var source = Navigation.Source()
     /// let settings = Navigation.Destination(identity: source.mint(), value: Screen.settings)
     /// let again = Navigation.Destination(identity: source.mint(), value: Screen.settings)
     ///

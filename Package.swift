@@ -17,11 +17,15 @@ let package = Package(
             targets: ["Navigation Primitives"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/swift-primitives/swift-tagged-primitives.git", branch: "main"),
+    ],
     targets: [
         .target(
             name: "Navigation Primitives",
-            dependencies: []
+            dependencies: [
+                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
+            ]
         ),
         .testTarget(
             name: "Navigation Primitives Tests",

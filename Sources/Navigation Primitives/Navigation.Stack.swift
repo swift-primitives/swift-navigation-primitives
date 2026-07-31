@@ -8,7 +8,7 @@ extension Navigation {
     /// have to guess which occurrence was meant.
     ///
     /// ```swift
-    /// var source = Navigation.Identity.Source()
+    /// var source = Navigation.Source()
     /// var stack = Navigation.Stack<Screen>()
     ///
     /// let list = Navigation.Destination(identity: source.mint(), value: Screen.list)
@@ -95,7 +95,7 @@ extension Navigation.Stack {
     /// - Parameter destination: The placement to add.
     /// - Throws: ``Navigation/Error/duplicate(_:)`` when the stack already holds
     ///   a placement with the same identity. Minting each placement from the
-    ///   state's own ``Navigation/Identity/Source`` makes that unreachable.
+    ///   state's own ``Navigation/Source`` makes that unreachable.
     public mutating func push(
         _ destination: Navigation.Destination<Value>
     ) throws(Navigation.Error) {

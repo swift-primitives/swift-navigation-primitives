@@ -12,7 +12,7 @@ shell-independent presentation — as pure values with no runtime attached.
 - **Placement is identified** — `Navigation.Destination` pairs your own destination value with a
   `Navigation.Identity`, so two visits to the same place stay distinguishable and "go back to that
   one" means something.
-- **Identities are minted, never guessed** — `Navigation.Identity.Source` is a value that mints in
+- **Identities are minted, never guessed** — `Navigation.Source` is a value that mints in
   strictly increasing order from zero and never recycles, so replayed state is bit-identical and a
   stale reference can never alias a newer placement.
 - **Stacks enforce their one invariant** — identities are unique within a `Navigation.Stack`, which
@@ -38,7 +38,7 @@ enum Screen: Hashable, Sendable {
     case detail(Int)
 }
 
-var source = Navigation.Identity.Source()
+var source = Navigation.Source()
 var stack = Navigation.Stack<Screen>()
 
 let list = Navigation.Destination(identity: source.mint(), value: Screen.list)
@@ -78,7 +78,9 @@ dependencies: [
 ```
 
 Requires Swift 6.3.3. Platform minimums: macOS 26, iOS 26, tvOS 26, watchOS 26, visionOS 26. The
-package has no dependencies, imports no Foundation, and uses no reflection or Objective-C interop.
+package's only dependency is `swift-tagged-primitives`, which it re-exports; it imports no
+Foundation and uses no reflection or Objective-C interop. Its Embedded build is verified in CI, as
+is the dependency's.
 
 ---
 
@@ -94,8 +96,8 @@ Key types in the `Navigation` namespace:
 
 | Type | Purpose |
 |------|---------|
-| `Navigation.Identity` | Names one *occurrence* of a destination, never the destination itself. |
-| `Navigation.Identity.Source` | Mints identities in strictly increasing order; a value, so state stays reproducible. |
+| `Navigation.Identity` | Names one *occurrence* of a destination, never the destination itself. A `Tagged<Navigation, UInt64>` — the ecosystem already owns phantom-typed value wrappers. |
+| `Navigation.Source` | Mints identities in strictly increasing order; a value, so state stays reproducible. |
 | `Navigation.Destination` | One placement: an identity plus your own destination value. |
 | `Navigation.Stack` | An ordered run of placements with unique identities; a `RandomAccessCollection`. |
 | `Navigation.Presentation` | How one destination is shown over another: a mode and a dismissal authority. |

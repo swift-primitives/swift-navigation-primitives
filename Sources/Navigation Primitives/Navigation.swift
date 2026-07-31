@@ -20,7 +20,7 @@
 /// ```swift
 /// enum Screen { case home, settings, profile(String) }
 ///
-/// var source = Navigation.Identity.Source()
+/// var source = Navigation.Source()
 /// var stack = Navigation.Stack<Screen>()
 ///
 /// try stack.push(Navigation.Destination(identity: source.mint(), value: .settings))
