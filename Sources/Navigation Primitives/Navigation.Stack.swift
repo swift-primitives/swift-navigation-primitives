@@ -48,7 +48,7 @@ extension Navigation.Stack {
     /// - Throws: ``Navigation/Error/duplicate(_:)`` when two placements share an
     ///   identity.
     public init(
-        _ destinations: some Sequence<Navigation.Destination<Value>>
+        _ destinations: some Swift.Sequence<Navigation.Destination<Value>>
     ) throws(Navigation.Error) {
         self.init()
         for destination in destinations {
