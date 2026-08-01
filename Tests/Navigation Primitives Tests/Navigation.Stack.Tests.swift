@@ -6,6 +6,7 @@ import Testing
 @Suite struct `Navigation Stack Tests` {
     @Suite struct Unit {}
     @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 
     enum Screen: Sendable, Hashable {
         case list

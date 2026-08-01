@@ -7,6 +7,7 @@ import Testing
 @Suite struct `Navigation Identity Tests` {
     @Suite struct Unit {}
     @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
 extension `Navigation Identity Tests`.Unit {
