@@ -1,36 +1,39 @@
-// swift-tools-version: 6.3.3
+// swift-tools-version: 6.4
 
 import PackageDescription
 
 let package = Package(
     name: "swift-navigation-primitives",
     platforms: [
-        .macOS("27"),
-        .iOS("27"),
-        .tvOS("27"),
-        .watchOS("27"),
-        .visionOS("27")
+        .macOS(.v27),
+        .iOS(.v27),
+        .tvOS(.v27),
+        .watchOS(.v27),
+        .visionOS(.v27),
     ],
     products: [
         .library(
             name: "Navigation Primitives",
             targets: ["Navigation Primitives"]
-        ),
+        )
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-primitives/swift-tagged-primitives.git", branch: "main"),
+        .package(
+            url: "https://github.com/swift-primitives/swift-tagged-primitives.git",
+            branch: "main"
+        )
     ],
     targets: [
         .target(
             name: "Navigation Primitives",
             dependencies: [
-                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
+                .product(name: "Tagged Primitives", package: "swift-tagged-primitives")
             ]
         ),
         .testTarget(
             name: "Navigation Primitives Tests",
             dependencies: [
-                "Navigation Primitives",
+                "Navigation Primitives"
             ]
         ),
     ],
