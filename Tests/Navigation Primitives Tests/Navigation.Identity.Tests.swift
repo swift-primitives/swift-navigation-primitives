@@ -1,9 +1,6 @@
 import Navigation_Primitives
 import Testing
 
-/// `Navigation.Identity` is a `Tagged` instantiation, and a suite cannot be nested in a
-/// constrained extension of a generic type, so the suite is hosted top-level per the
-/// testing skill.
 @Suite struct `Navigation Identity Tests` {
     @Suite struct Unit {}
     @Suite struct `Edge Case` {}

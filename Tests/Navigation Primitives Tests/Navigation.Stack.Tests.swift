@@ -1,8 +1,6 @@
 import Navigation_Primitives
 import Testing
 
-/// `Navigation.Stack` is generic, and a suite declared in an extension of a generic type
-/// cannot be discovered, so the suite is hosted top-level per the testing skill.
 @Suite struct `Navigation Stack Tests` {
     @Suite struct Unit {}
     @Suite struct `Edge Case` {}
@@ -14,7 +12,6 @@ import Testing
         case edit
     }
 
-    /// Mints placements so a test reads as a sequence of navigations.
     struct Placer {
         var source = Navigation.Source()
 
